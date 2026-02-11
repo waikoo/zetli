@@ -1,0 +1,13 @@
+[project]
+name = "zetli"
+version = "0.1.0"
+description = "A todo app called zetli"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "colorama>=0.4.6",
+    "mypy>=1.19.1",
+]
+
+[project.scripts]
+zetli = "zetli.main:main"
