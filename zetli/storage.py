@@ -7,13 +7,10 @@ from zetli.tips import Tips
 
 class Storage:
     def __init__(self):
-
-        self.local_app_data = os.getenv('LOCALAPPDATA')
-        if self.local_app_data is None:
-            raise RuntimeError("LOCALAPPDATA is not set")
-        self.appdata_path = Path(self.local_app_data)
+        self.app_folder = Path(user_data_dir("zetli"))
         self.app_folder = self.appdata_path / 'zetli'
         self.tasks_file = self.app_folder / 'tasks.json'
+        self.app_folder.mkdir(parents=True, exist_ok=True)
         self.tips = Tips()
 
     @staticmethod
