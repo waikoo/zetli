@@ -12,6 +12,7 @@ class Storage:
         self.tasks_file = self.app_folder / "tasks.json"
         self.app_folder.mkdir(parents=True, exist_ok=True)
         self.tips = Tips()
+        self.ensure_initialized()
 
     @staticmethod
     def get_starter_content():
@@ -19,6 +20,16 @@ class Storage:
             "last_id": 0,
             "tasks": []
         }
+
+    def ensure_initialized(self):
+        self.app_folder.mkdir(parents=True, exist_ok=True)
+
+        if not self.tasks_file.exists():
+            import json
+            self.tasks_file.write_text(
+                json.dumps(self.get_starter_content(), indent=2),
+                encoding="utf-8"
+            )
 
     def setup(self):
         if not self.app_folder.exists():
